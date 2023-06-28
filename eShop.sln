@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{88
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Services.CouponAPI", "eShop.Services.CouponAPI\eShop.Services.CouponAPI.csproj", "{7641C703-75D7-4AB6-90E5-077723B23CA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.Web", "eShop.Web\eShop.Web.csproj", "{AEDA00E5-D4FC-455B-B1EF-0B4F9D73EAA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +25,17 @@ Global
 		{7641C703-75D7-4AB6-90E5-077723B23CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7641C703-75D7-4AB6-90E5-077723B23CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7641C703-75D7-4AB6-90E5-077723B23CA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEDA00E5-D4FC-455B-B1EF-0B4F9D73EAA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEDA00E5-D4FC-455B-B1EF-0B4F9D73EAA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEDA00E5-D4FC-455B-B1EF-0B4F9D73EAA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEDA00E5-D4FC-455B-B1EF-0B4F9D73EAA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7641C703-75D7-4AB6-90E5-077723B23CA4} = {884C3857-7CEA-4973-928D-85F730C2CB6B}
+		{AEDA00E5-D4FC-455B-B1EF-0B4F9D73EAA3} = {31B41C6E-8963-40C8-A865-1EB42665D940}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23A4D3C9-2304-470E-8DDE-140AA505DA92}

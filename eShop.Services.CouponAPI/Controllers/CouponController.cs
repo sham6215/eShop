@@ -56,7 +56,7 @@ namespace eShop.Services.CouponAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetByCode/code")]
+        [Route("GetByCode/{code}")]
         public object? GetCoupon(string code)
         {
             try
@@ -134,6 +134,7 @@ namespace eShop.Services.CouponAPI.Controllers
         }
 
         [HttpDelete]
+        [Route("{id}")]
         public ResponseDto DeleteCoupon(int id)
         {
             try

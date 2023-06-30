@@ -23,7 +23,6 @@ namespace eShop.Web.Services
             {
                 HttpClient httpClient = _httpClientFactory.CreateClient("eShop Http Client");
                 HttpRequestMessage message = new HttpRequestMessage();
-                //message.Headers.Add("Content-Type", "application/json");
                 message.Headers.Add("Accept", "application/json");
                 // token
                 message.RequestUri = new Uri(request.Url);
@@ -42,12 +41,14 @@ namespace eShop.Web.Services
 
                 if (request.Data != null)
                 {
-                    message.Content = new StringContent(JsonConvert.SerializeObject(request.Data));
+                    message.Content = new StringContent(JsonConvert.SerializeObject(request.Data), 
+                        System.Text.Encoding.UTF8,
+                        "application/json");
                 }
 
                 HttpResponseMessage responseMessage = await httpClient.SendAsync(message);
 
-                ResponseDto responseDto = new ResponseDto() { Result = false };
+                ResponseDto responseDto = new ResponseDto() { IsSuccess = false, Result = null };
 
                 switch (responseMessage.StatusCode)
                 {
@@ -70,7 +71,7 @@ namespace eShop.Web.Services
             catch (Exception ex)
             {
                 return new ResponseDto() {
-                    Result = false,
+                    Result = null,
                     IsSuccess = true,
                     Message = ex.InnerException?.Message ?? ex.Message
                 };

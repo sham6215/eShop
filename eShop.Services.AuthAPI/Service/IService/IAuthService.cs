@@ -6,5 +6,6 @@ namespace eShop.Services.AuthAPI.Service.IService
     {
         Task<LoginResponseDto> Login(LoginRequestDto loginRequest);
         Task<UserDto> Register(RegisterRequestDto registerRequest);
+        Task AssignRoleAsync(string email, string role);
     }
 }

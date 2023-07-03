@@ -60,11 +60,15 @@ namespace eShop.Web.Services
                         responseDto.Message = "Unauthorized"; break;
                     case System.Net.HttpStatusCode.InternalServerError:
                         responseDto.Message = "Internal Server Error"; break;
-                    default:
+                    case System.Net.HttpStatusCode.BadRequest:
+                        responseDto.Message = "Bad Request"; break;
+                    case System.Net.HttpStatusCode.OK:
                         var data = await responseMessage.Content.ReadAsStringAsync();
                         responseDto = JsonConvert.DeserializeObject<ResponseDto>(data);
                         responseDto.IsSuccess = true;
                         break;
+                    default:
+                        responseDto.Message = responseMessage.StatusCode.ToString(); break;
                 }
                 return responseDto;
             }
@@ -72,7 +76,7 @@ namespace eShop.Web.Services
             {
                 return new ResponseDto() {
                     Result = null,
-                    IsSuccess = true,
+                    IsSuccess = false,
                     Message = ex.InnerException?.Message ?? ex.Message
                 };
             }

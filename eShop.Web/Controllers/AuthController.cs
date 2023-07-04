@@ -2,19 +2,26 @@
 using eShop.Web.Models.Dto;
 using eShop.Web.Services.IService;
 using eShop.Web.Utilities;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Net;
+using System.Security.Claims;
 
 namespace eShop.Web.Controllers
 {
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;
+        private readonly ITokenProvider _tokenProvider;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, ITokenProvider tokenProvider)
         {
             _authService = authService;
+            _tokenProvider = tokenProvider;
         }
 
         public async Task<IActionResult> Register()
@@ -78,7 +85,12 @@ namespace eShop.Web.Controllers
 
                     var loginDto = JsonConvert.DeserializeObject<LoginResponseDto>(Convert.ToString(loginResponse.Result));
 
-                    return RedirectToAction("Index", "Home");
+                    if (loginDto?.Token != null)
+                    _tokenProvider.SetToken(loginDto.Token);
+
+                    await SignInAsync(loginDto);
+
+                    return await RedirectHome();
 
                 }
             }
@@ -89,12 +101,47 @@ namespace eShop.Web.Controllers
             return View(loginRequest);
         }
 
-        public IActionResult Logout()
+        private async Task SignInAsync(LoginResponseDto loginDto)
         {
-            return View();
+                var handler = new JwtSecurityTokenHandler();
+            var jwt = handler.ReadJwtToken(loginDto.Token);
+            var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            identity.AddClaim(new Claim(JwtRegisteredClaimNames.Email,
+                jwt.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Email).Value));
+            identity.AddClaim(new Claim(JwtRegisteredClaimNames.Name,
+                jwt.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Name).Value));
+            identity.AddClaim(new Claim(JwtRegisteredClaimNames.Sub,
+                jwt.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub).Value));
+
+            identity.AddClaim(new Claim(ClaimTypes.Name,
+                jwt.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Email).Value));
+
+            var roles = jwt.Claims
+                .Where(c => c.Type == "role")
+                .Select(c => new Claim(ClaimTypes.Role, c.Value));
+            
+            identity.AddClaims(roles);
+
+
+            var principal = new ClaimsPrincipal(identity);
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
         }
 
-            public IActionResult AssignRole()
+        private async Task<IActionResult> RedirectHome()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            HttpContext.SignOutAsync();
+            _tokenProvider.ClearToken();
+            return await RedirectHome();
+        }
+
+        public IActionResult AssignRole()
         {
             return View();
         }

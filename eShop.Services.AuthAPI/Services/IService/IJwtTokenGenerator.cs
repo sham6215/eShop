@@ -4,6 +4,6 @@ namespace eShop.Services.AuthAPI.Service.IService
 {
     public interface IJwtTokenGenerator
     {
-        string GenerateToken(ApplicationUser user);
+        string GenerateToken(ApplicationUser user, IList<string>? roles);
     }
 }

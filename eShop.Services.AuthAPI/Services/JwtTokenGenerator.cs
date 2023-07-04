@@ -17,7 +17,7 @@ namespace eShop.Services.AuthAPI.Service
             _jwtOptions = jwtOptions.Value;
         }
 
-        public string GenerateToken(ApplicationUser user)
+        public string GenerateToken(ApplicationUser user, IList<string>? roles)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);
@@ -27,6 +27,11 @@ namespace eShop.Services.AuthAPI.Service
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(JwtRegisteredClaimNames.Name, user.Name)
             };
+
+            if (roles?.Any() is true)
+            {
+                claimList.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r)));
+            }
 
             var tokenDescriptor = new SecurityTokenDescriptor {
                 Audience = _jwtOptions.Audience,

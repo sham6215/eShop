@@ -1,6 +1,7 @@
 ﻿using eShop.Web.Models.Dto;
 using eShop.Web.Services.IService;
 using Newtonsoft.Json;
+using System.Net;
 using System.Text.Json.Serialization;
 using static eShop.Web.Utilities.StaticDetails;
 
@@ -47,29 +48,40 @@ namespace eShop.Web.Services
                 }
 
                 HttpResponseMessage responseMessage = await httpClient.SendAsync(message);
-
                 ResponseDto responseDto = new ResponseDto() { IsSuccess = false, Result = null };
 
-                switch (responseMessage.StatusCode)
+                var data = await responseMessage.Content.ReadAsStringAsync();
+                if (data?.Length > 0 && responseMessage.StatusCode < HttpStatusCode.InternalServerError)
                 {
-                    case System.Net.HttpStatusCode.NotFound:
-                        responseDto.Message = "Not Found"; break;
-                    case System.Net.HttpStatusCode.Forbidden:
-                        responseDto.Message = "Forbidden"; break;
-                    case System.Net.HttpStatusCode.Unauthorized:
-                        responseDto.Message = "Unauthorized"; break;
-                    case System.Net.HttpStatusCode.InternalServerError:
-                        responseDto.Message = "Internal Server Error"; break;
-                    case System.Net.HttpStatusCode.BadRequest:
-                        responseDto.Message = "Bad Request"; break;
-                    case System.Net.HttpStatusCode.OK:
-                        var data = await responseMessage.Content.ReadAsStringAsync();
-                        responseDto = JsonConvert.DeserializeObject<ResponseDto>(data);
-                        responseDto.IsSuccess = true;
-                        break;
-                    default:
-                        responseDto.Message = responseMessage.StatusCode.ToString(); break;
+                    responseDto = JsonConvert.DeserializeObject<ResponseDto>(data);
                 }
+
+                if (responseMessage.StatusCode == HttpStatusCode.OK)
+                {
+                    responseDto.IsSuccess = true;
+                }
+                else
+                {
+                    if (responseDto.Message?.Length < 1)
+                    {
+                        switch (responseMessage.StatusCode)
+                        {
+                            case HttpStatusCode.NotFound:
+                                responseDto.Message = "Not Found"; break;
+                            case HttpStatusCode.Forbidden:
+                                responseDto.Message = "Forbidden"; break;
+                            case HttpStatusCode.Unauthorized:
+                                responseDto.Message = "Unauthorized"; break;
+                            case HttpStatusCode.InternalServerError:
+                                responseDto.Message = "Internal Server Error"; break;
+                            case HttpStatusCode.BadRequest:
+                                responseDto.Message = "Bad Request"; break;
+                            default:
+                                responseDto.Message = responseMessage.StatusCode.ToString(); break;
+                        }
+                    }
+                }
+
                 return responseDto;
             }
             catch (Exception ex)

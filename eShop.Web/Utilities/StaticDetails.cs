@@ -4,6 +4,7 @@
     {
         public static string CouponApiBase { get; set; }
         public static string AuthApiBase { get; set; }
+        public static string TokenCookie { get; } = "JWToken";
 
         public enum ApiType
         {
@@ -12,5 +13,7 @@
             PUT,
             DELETE
         }
+
+
     }
 }

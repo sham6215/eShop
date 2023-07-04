@@ -1,8 +1,12 @@
-﻿namespace eShop.Models.Dto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace eShop.Models.Dto
 {
     public class LoginRequestDto
     {
+        [Required]
         public string UserName { get; set; }
+        [Required]
         public string Password { get; set; }
     }
 }

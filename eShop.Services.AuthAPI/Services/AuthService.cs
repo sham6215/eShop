@@ -67,9 +67,11 @@ namespace eShop.Services.AuthAPI.Service
                     var isValid = await _userManager.CheckPasswordAsync(user, loginRequest.Password);
                     if (isValid)
                     {
+                        var roles = await _userManager.GetRolesAsync(user);
+
                         return new LoginResponseDto { 
                             User = _mapper.Map<ApplicationUser, UserDto>(user), 
-                            Token = _jwtTokenGenerator.GenerateToken(user)
+                            Token = _jwtTokenGenerator.GenerateToken(user, roles)
                         };
                     }
                 }

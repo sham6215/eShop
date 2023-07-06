@@ -20,9 +20,9 @@ namespace eShop.Web.Services
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = ApiType.POST,
-                Url = StaticDetails.AuthApiBase + "/api/auth/Login",
+                Url = AuthApiBase + "/api/auth/Login",
                 Data = loginRequest
-            });
+            }, false);
         }
 
         public async Task<ResponseDto?> RegisterAsync(RegisterRequestDto registerRequest)
@@ -30,9 +30,9 @@ namespace eShop.Web.Services
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = ApiType.POST,
-                Url = StaticDetails.AuthApiBase + "/api/auth/Register",
+                Url = AuthApiBase + "/api/auth/Register",
                 Data = registerRequest
-            });
+            }, false);
         }
 
         public async Task<ResponseDto?> AssignRoleAsync(AssignRoleDto assignRoleRequest)
@@ -40,7 +40,7 @@ namespace eShop.Web.Services
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = ApiType.POST,
-                Url = StaticDetails.AuthApiBase + "/api/auth/AssignRole",
+                Url = AuthApiBase + "/api/auth/AssignRole",
                 Data = assignRoleRequest
             });
         }

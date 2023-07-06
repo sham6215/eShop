@@ -6,6 +6,8 @@
         public static string AuthApiBase { get; set; }
         public static string TokenCookie { get; } = "JWToken";
 
+        public static string HeaderAuthorization { get; } = "Authorization";
+
         public enum ApiType
         {
             GET,

@@ -1,5 +1,6 @@
 ﻿using eShop.Web.Models.Dto;
 using eShop.Web.Services.IService;
+using eShop.Web.Utilities;
 using Newtonsoft.Json;
 using System.Net;
 using System.Text.Json.Serialization;
@@ -10,22 +11,24 @@ namespace eShop.Web.Services
     public class BaseService : IBaseService
     {
         private IHttpClientFactory _httpClientFactory;
+        private ITokenProvider _tokenProvider;
 
-        public BaseService(IHttpClientFactory httpClientFactory)
+        public BaseService(IHttpClientFactory httpClientFactory, ITokenProvider tokenProvider)
         {
 
             _httpClientFactory = httpClientFactory;
-
+            _tokenProvider = tokenProvider;
         }
 
-        public async Task<ResponseDto?> SendAsync(RequestDto request)
+        public async Task<ResponseDto?> SendAsync(RequestDto request, bool useToken = true)
         {
             try
             {
                 HttpClient httpClient = _httpClientFactory.CreateClient("eShop Http Client");
                 HttpRequestMessage message = new HttpRequestMessage();
                 message.Headers.Add("Accept", "application/json");
-                // token
+                message.Headers.Add(HeaderAuthorization, $"Bearer {_tokenProvider.GetToken()}");
+                
                 message.RequestUri = new Uri(request.Url);
 
                 switch (request.ApiType)

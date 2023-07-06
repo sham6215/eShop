@@ -2,6 +2,7 @@
 using eShop.Services.CouponAPI.Data;
 using eShop.Services.CouponAPI.Models;
 using eShop.Services.CouponAPI.Models.Dto;
+using eShop.Services.CouponAPI.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -96,6 +97,7 @@ namespace eShop.Services.CouponAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = StaticRoles.Admin)]
         public ResponseDto AddCoupon([FromBody] CouponDto couponDto)
         {
             try
@@ -116,6 +118,7 @@ namespace eShop.Services.CouponAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = StaticRoles.Admin)]
         public ResponseDto UpdateCoupon([FromBody] CouponDto couponDto)
         {
             try
@@ -137,6 +140,7 @@ namespace eShop.Services.CouponAPI.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = StaticRoles.Admin)]
         public ResponseDto DeleteCoupon(int id)
         {
             try

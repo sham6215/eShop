@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Services.CouponAPI", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Web", "eShop.Web\eShop.Web.csproj", "{AEDA00E5-D4FC-455B-B1EF-0B4F9D73EAA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.Services.AuthAPI", "eShop.Services.AuthAPI\eShop.Services.AuthAPI.csproj", "{57F4A536-4318-43DB-8CDE-1DF8FC66AE42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Services.AuthAPI", "eShop.Services.AuthAPI\eShop.Services.AuthAPI.csproj", "{57F4A536-4318-43DB-8CDE-1DF8FC66AE42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.Services.ProductAPI", "eShop.Services.ProductAPI\eShop.Services.ProductAPI.csproj", "{7C4D96D7-E60B-41F6-AC85-005331B65332}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{57F4A536-4318-43DB-8CDE-1DF8FC66AE42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57F4A536-4318-43DB-8CDE-1DF8FC66AE42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57F4A536-4318-43DB-8CDE-1DF8FC66AE42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C4D96D7-E60B-41F6-AC85-005331B65332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C4D96D7-E60B-41F6-AC85-005331B65332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C4D96D7-E60B-41F6-AC85-005331B65332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C4D96D7-E60B-41F6-AC85-005331B65332}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +49,7 @@ Global
 		{7641C703-75D7-4AB6-90E5-077723B23CA4} = {884C3857-7CEA-4973-928D-85F730C2CB6B}
 		{AEDA00E5-D4FC-455B-B1EF-0B4F9D73EAA3} = {31B41C6E-8963-40C8-A865-1EB42665D940}
 		{57F4A536-4318-43DB-8CDE-1DF8FC66AE42} = {884C3857-7CEA-4973-928D-85F730C2CB6B}
+		{7C4D96D7-E60B-41F6-AC85-005331B65332} = {884C3857-7CEA-4973-928D-85F730C2CB6B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23A4D3C9-2304-470E-8DDE-140AA505DA92}

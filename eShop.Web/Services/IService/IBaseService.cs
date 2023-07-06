@@ -4,6 +4,6 @@ namespace eShop.Web.Services.IService
 {
     public interface IBaseService
     {
-        Task<ResponseDto?> SendAsync(RequestDto request);
+        Task<ResponseDto?> SendAsync(RequestDto request, bool useToken = true);
     }
 }

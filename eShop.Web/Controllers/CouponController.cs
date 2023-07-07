@@ -55,9 +55,9 @@ namespace eShop.Web.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> CouponDelete(int couponId)
+        public async Task<IActionResult> CouponDelete(int id)
         {
-            var response = await _couponService.GetCouponAsync(couponId);
+            var response = await _couponService.GetCouponAsync(id);
             if (response != null && response.IsSuccess)
             {
                 var coupon = JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(response.Result));

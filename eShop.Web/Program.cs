@@ -1,3 +1,4 @@
+using eShop.Services.ProductAPI.Service.IService;
 using eShop.Web.Services;
 using eShop.Web.Services.IService;
 using eShop.Web.Utilities;
@@ -17,6 +18,7 @@ builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<ICouponService, CouponService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => {
@@ -27,6 +29,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 StaticDetails.CouponApiBase = builder.Configuration["ServiceUrls:CouponApiBase"];
 StaticDetails.AuthApiBase = builder.Configuration["ServiceUrls:AuthApiBase"];
+StaticDetails.ProductApiBase = builder.Configuration["ServiceUrls:ProductApiBase"];
 
 var app = builder.Build();
 

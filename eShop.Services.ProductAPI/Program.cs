@@ -1,5 +1,6 @@
 using AutoMapper;
 using eShop.Services.ProductAPI.Data;
+using eShop.Services.ProductAPI.Extensions;
 using eShop.Services.ProductAPI.Mapping;
 using eShop.Services.ProductAPI.Service.IService;
 using eShop.Services.ProductAPI.Services;
@@ -27,6 +28,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.AddAppAuthentication();
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,6 +41,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 
 app.UseAuthorization();
 

@@ -1,6 +1,9 @@
 ﻿using eShop.Services.ProductAPI.Data;
 using eShop.Services.ProductAPI.Models;
+using eShop.Services.ProductAPI.Models.Dto;
 using eShop.Services.ProductAPI.Service.IService;
+using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace eShop.Services.ProductAPI.Services
@@ -45,6 +48,21 @@ namespace eShop.Services.ProductAPI.Services
         {
             _db.Attach(product);
             _db.Entry(product).State = EntityState.Modified;
+            await _db.SaveChangesAsync();
+            _db.Entry(product).State = EntityState.Detached;
+            return product;
+        }
+
+        public async Task<Product?> PatchProductAsync(int id, JsonPatchDocument<Product> patchProduct)
+        {
+            var product = await _db.Products.FirstOrDefaultAsync(p => p.Id == id);
+            if (product == null)
+            {
+                return null;
+            }
+            patchProduct.ApplyTo(product);
+            // Save the updated product in the database
+            _db.Update(product);
             await _db.SaveChangesAsync();
             _db.Entry(product).State = EntityState.Detached;
             return product;

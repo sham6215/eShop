@@ -46,7 +46,7 @@
 							@item.Price.ToString("C2")
 						</td>
 						<td>
-							<a class="btn btn-success">
+							<a class="btn btn-success" asp-action="ProductUpdate" asp-route-id="@item.Id">
 								<i class="bi bi-pencil-square"></i>
 							</a>
 							<a class="btn btn-danger" asp-action="ProductDelete" asp-route-id="@item.Id">

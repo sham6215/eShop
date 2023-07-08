@@ -3,6 +3,7 @@
 
 <form method="post">
     <br />
+    <input asp-for="Id" hidden />
     <div class="container border p-3">
         <h1 class="text-white text-center">Create Product</h1>
         <hr />
@@ -43,15 +44,14 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="col-5 offset-2">
-                <a class="btn-primary btn form-control ">Back to List</a>
+                <a class="btn-primary btn form-control ">Cancel</a>
             </div>
             <div class="col-5">
-                <input type="submit" value="Create" class="btn btn-success form-control" />
+                <input type="submit" value="Update" class="btn btn-success form-control" />
             </div>
         </div>
     </div>
 </form>
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

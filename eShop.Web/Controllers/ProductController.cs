@@ -81,5 +81,35 @@ namespace eShop.Web.Controllers
 
             return View(productDto);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ProductUpdate(int id)
+        {
+            var productDto = new ProductDto();
+
+            var responseProduct = await _service.GetProductAsync(id);
+            if (responseProduct?.Result == null || !responseProduct.IsSuccess)
+            {
+                TempData["error"] = $"Error: {responseProduct.Message}";
+                return View();
+            }
+            productDto = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(responseProduct.Result));
+
+            return View(productDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ProductUpdate(ProductDto productDto)
+        {
+            var response = await _service.UpdateProductAsync(productDto);
+            if (response?.IsSuccess is true)
+            {
+                TempData["success"] = $"Product updated";
+                return RedirectToAction("ProductIndex");
+            }
+            TempData["error"] = response.Message;
+
+            return View(productDto);
+        }
     }
 }

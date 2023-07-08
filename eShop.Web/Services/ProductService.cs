@@ -57,7 +57,7 @@ namespace eShop.Web.Services
             return await _service.SendAsync(request);
         }
 
-        public async Task<ResponseDto?> UpdateProductAsync(ResponseDto product)
+        public async Task<ResponseDto?> UpdateProductAsync(ProductDto product)
         {
             var request = new RequestDto
             {

@@ -7,7 +7,7 @@ namespace eShop.Services.ProductAPI.Service.IService
         Task<ResponseDto?> GetProductsAsync();
         Task<ResponseDto?> GetProductAsync(int id);
         Task<ResponseDto?> CreateProductAsync(ProductDto product);
-        Task<ResponseDto?> UpdateProductAsync(ResponseDto product);
+        Task<ResponseDto?> UpdateProductAsync(ProductDto product);
         Task<ResponseDto?> DeleteProductAsync(int id);
     }
 }

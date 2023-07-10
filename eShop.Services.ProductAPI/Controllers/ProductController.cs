@@ -12,7 +12,6 @@ namespace eShop.Services.ProductAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -67,7 +66,7 @@ namespace eShop.Services.ProductAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = StaticRoles.Admin)]
+        [Authorize(Roles = $"{StaticRoles.Admin}, {StaticRoles.Customer}")]
         public async Task<ActionResult> CreateProduct([FromBody] ProductDto productDto)
         {
             try
@@ -104,26 +103,26 @@ namespace eShop.Services.ProductAPI.Controllers
             return Ok(_response);
         }
 
-        [HttpPatch]
-        [Route("{id:int}")]
-        [Authorize(Roles = StaticRoles.Admin)]
-        public async Task<ActionResult> PatchProduct([FromRoute, Required]int id, [FromBody] JsonPatchDocument<ProductDto> productPatchDto)
-        {
-            /*try
-            {
-                var patchProduct = _mapper.Map<JsonPatchDocument<Product> >(productPatchDto);
-                var product = await _productService.PatchProductAsync(id, patchProduct);
-                _response.Result = _mapper.Map<ProductDto>(product);
-                _response.IsSuccess = true;
-            }
-            catch (Exception ex)
-            {
-                _response.Message = ex.InnerException?.Message ?? ex.Message;
-                return BadRequest(_response);
-            }
-            return Ok(_response);*/
-            throw new NotImplementedException();
-        }
+        //[HttpPatch]
+        //[Route("{id:int}")]
+        //[Authorize(Roles = StaticRoles.Admin)]
+        //public async Task<ActionResult> PatchProduct([FromRoute, Required]int id, [FromBody] JsonPatchDocument<ProductDto> productPatchDto)
+        //{
+        //    /*try
+        //    {
+        //        var patchProduct = _mapper.Map<JsonPatchDocument<Product> >(productPatchDto);
+        //        var product = await _productService.PatchProductAsync(id, patchProduct);
+        //        _response.Result = _mapper.Map<ProductDto>(product);
+        //        _response.IsSuccess = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _response.Message = ex.InnerException?.Message ?? ex.Message;
+        //        return BadRequest(_response);
+        //    }
+        //    return Ok(_response);*/
+        //    throw new NotImplementedException();
+        //}
 
         [HttpDelete]
         [Route("{id:int}")]

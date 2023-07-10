@@ -136,7 +136,7 @@ namespace eShop.Web.Controllers
 
         public async Task<IActionResult> Logout()
         {
-            HttpContext.SignOutAsync();
+            await HttpContext.SignOutAsync();
             _tokenProvider.ClearToken();
             return await RedirectHome();
         }

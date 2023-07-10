@@ -101,13 +101,20 @@ namespace eShop.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> ProductUpdate(ProductDto productDto)
         {
-            var response = await _service.UpdateProductAsync(productDto);
-            if (response?.IsSuccess is true)
+            try
             {
-                TempData["success"] = $"Product updated";
-                return RedirectToAction("ProductIndex");
+                var response = await _service.UpdateProductAsync(productDto);
+                if (response?.IsSuccess is true)
+                {
+                    TempData["success"] = $"Product updated";
+                    return RedirectToAction("ProductIndex");
+                }
+                TempData["error"] = response.Message;
             }
-            TempData["error"] = response.Message;
+            catch (Exception)
+            {
+            //    throw;
+            }
 
             return View(productDto);
         }

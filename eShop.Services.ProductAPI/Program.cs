@@ -28,8 +28,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.AddAppAuthentication();
 builder.Services.AddAuthorization();
+builder.AddAppAuthentication();
 
 var app = builder.Build();
 

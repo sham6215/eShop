@@ -4,9 +4,7 @@ using eShop.Services.ProductAPI.Models.Dto;
 using eShop.Services.ProductAPI.Service.IService;
 using eShop.Services.ProductAPI.Utilities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 
 namespace eShop.Services.ProductAPI.Controllers
 {

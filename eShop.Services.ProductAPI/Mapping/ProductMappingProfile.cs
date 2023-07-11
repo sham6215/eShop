@@ -10,9 +10,7 @@ namespace eShop.Services.ProductAPI.Mapping
     {
         public ProductMappingProfile()
         {
-            CreateMap<Product, ProductDto>();
-            CreateMap<ProductDto, Product>();
-            CreateMap<JsonPatchDocument<ProductDto>, JsonPatchDocument<Product> >();
+            CreateMap<Product, ProductDto>().ReverseMap();
         }
     }
 }

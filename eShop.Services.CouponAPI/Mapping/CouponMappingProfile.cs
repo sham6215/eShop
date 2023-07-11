@@ -8,8 +8,7 @@ namespace eShop.Services.CouponAPI.Mapping
     {
         public CouponMappingProfile()
         {
-            CreateMap<Coupon, CouponDto>();
-            CreateMap<CouponDto, Coupon>();
+            CreateMap<Coupon, CouponDto>().ReverseMap();
         }
     }
 }

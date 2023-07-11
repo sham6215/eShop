@@ -8,8 +8,7 @@ namespace eShop.Services.Auth.Mapping
     {
         public AuthMappingProfile()
         {
-            CreateMap<ApplicationUser, UserDto>();
-            CreateMap<UserDto, ApplicationUser>();
+            CreateMap<ApplicationUser, UserDto>().ReverseMap();
         }
     }
 }

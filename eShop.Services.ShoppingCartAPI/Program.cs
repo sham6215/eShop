@@ -4,6 +4,8 @@ using eShop.Services.ShoppingCartAPI.Extensions;
 using eShop.Services.ShoppingCartAPI.Mapping;
 using eShop.Services.ShoppingCartAPI.Service.IService;
 using eShop.Services.ShoppingCartAPI.Services;
+using eShop.Services.ShoppingCartAPI.Services.IService;
+using eShop.Services.ShoppingCartAPI.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,11 +21,17 @@ builder.Services.AddDbContext<AppDbContext>(option => {
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddHttpClient(StaticData.ProductHttpClient, 
+    u => u.BaseAddress = new Uri(builder.Configuration[StaticData.ProductApiConfig]));
+builder.Services.AddHttpClient(StaticData.CouponHttpClient,
+    u => u.BaseAddress = new Uri(builder.Configuration[StaticData.CouponApiConfig]));
 
 // Services DI setup
 
 // ShoppingCart service
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICouponService, CouponService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

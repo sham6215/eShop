@@ -1,4 +1,4 @@
-﻿namespace eShop.Models.Dto
+﻿namespace eShop.Web.Models.Dto
 {
     public class AssignRoleDto
     {

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 
 namespace eShop.Web.Models.Dto
 {
@@ -10,5 +11,7 @@ namespace eShop.Web.Models.Dto
         public string Description { get; set; }
         public string CategoryName { get; set; }
         public string ImageUrl { get; set; }
+        [Range(0, 100)]
+        public int Count { get; set; }
     }
 }

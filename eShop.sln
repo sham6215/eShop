@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Services.AuthAPI", "e
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Services.ProductAPI", "eShop.Services.ProductAPI\eShop.Services.ProductAPI.csproj", "{5272530A-4D22-48E4-84EA-FCFE8166A21C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.Services.ShoppingCartAPI", "eShop.Services.ShoppingCartAPI\eShop.Services.ShoppingCartAPI.csproj", "{450FF555-CE85-4DAF-92B2-10774FCD43FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Services.ShoppingCartAPI", "eShop.Services.ShoppingCartAPI\eShop.Services.ShoppingCartAPI.csproj", "{450FF555-CE85-4DAF-92B2-10774FCD43FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,15 +28,19 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7641C703-75D7-4AB6-90E5-077723B23CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7641C703-75D7-4AB6-90E5-077723B23CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7641C703-75D7-4AB6-90E5-077723B23CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7641C703-75D7-4AB6-90E5-077723B23CA4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AEDA00E5-D4FC-455B-B1EF-0B4F9D73EAA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEDA00E5-D4FC-455B-B1EF-0B4F9D73EAA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEDA00E5-D4FC-455B-B1EF-0B4F9D73EAA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEDA00E5-D4FC-455B-B1EF-0B4F9D73EAA3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{57F4A536-4318-43DB-8CDE-1DF8FC66AE42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57F4A536-4318-43DB-8CDE-1DF8FC66AE42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57F4A536-4318-43DB-8CDE-1DF8FC66AE42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57F4A536-4318-43DB-8CDE-1DF8FC66AE42}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5272530A-4D22-48E4-84EA-FCFE8166A21C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5272530A-4D22-48E4-84EA-FCFE8166A21C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5272530A-4D22-48E4-84EA-FCFE8166A21C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5272530A-4D22-48E4-84EA-FCFE8166A21C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{450FF555-CE85-4DAF-92B2-10774FCD43FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

@@ -1,5 +1,4 @@
-﻿using eShop.Models.Dto;
-using eShop.Web.Models.Dto;
+﻿using eShop.Web.Models.Dto;
 
 namespace eShop.Web.Services.IService
 {

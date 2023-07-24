@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace eShop.Models.Dto
+namespace eShop.Web.Models.Dto
 {
     public class RegisterRequestDto
     {

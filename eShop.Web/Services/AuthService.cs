@@ -1,5 +1,4 @@
-﻿using eShop.Models.Dto;
-using eShop.Web.Models.Dto;
+﻿using eShop.Web.Models.Dto;
 using eShop.Web.Services.IService;
 using eShop.Web.Utilities;
 using static eShop.Web.Utilities.StaticDetails;

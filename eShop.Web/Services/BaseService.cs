@@ -59,7 +59,7 @@ namespace eShop.Web.Services
                     responseDto = JsonConvert.DeserializeObject<ResponseDto>(data);
                 }
 
-                if (responseMessage.StatusCode == HttpStatusCode.OK)
+                if (responseDto == null && responseMessage.StatusCode == HttpStatusCode.OK)
                 {
                     responseDto.IsSuccess = true;
                 }

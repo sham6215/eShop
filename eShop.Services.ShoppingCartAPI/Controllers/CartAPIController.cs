@@ -122,7 +122,7 @@ namespace eShop.Services.ShoppingCartAPI.Controllers
             return _response;
         }
 
-        [HttpDelete("DetailsRemove")]
+        [HttpDelete("DetailsRemove/{detailsId}")]
         public async Task<ResponseDto> RemoveDetails(int detailsId)
         {
             try

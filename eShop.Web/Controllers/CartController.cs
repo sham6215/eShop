@@ -34,7 +34,52 @@ namespace eShop.Web.Controllers
             return View(cart);
         }
 
-		
+        public async Task<IActionResult> RemoveDetail(int detailsId)
+        {
+            var response = await _cartService.RemoveCartDetailsAsync(detailsId);
+
+            if (response?.IsSuccess is true)
+            {
+                TempData["success"] = "Product removed from Cart";
+            } else
+            {
+                TempData["error"] = $"Can't remove product: {response?.Message}";
+            }
+
+            return RedirectToAction("CartIndex");
+        }
+
+        public async Task<IActionResult> ApplyCoupon(CartDto cart)
+        {
+            var response = await _cartService.ApplyCouponAsync(cart.CartHeader.Id, cart.CartHeader.CouponCode);
+
+            if (response?.IsSuccess is true)
+            {
+                TempData["success"] = "Coupon applied";
+            }
+            else
+            {
+                TempData["error"] = $"Can't apply coupon: {response?.Message}";
+            }
+
+            return RedirectToAction("CartIndex");
+        }
+
+        public async Task<IActionResult> RemoveCoupon(int headerId)
+        {
+            var response = await _cartService.RemoveCouponAsync(headerId);
+
+            if (response?.IsSuccess is true)
+            {
+                TempData["success"] = "Coupon removed";
+            }
+            else
+            {
+                TempData["error"] = $"Can't remove coupon: {response?.Message}";
+            }
+
+            return RedirectToAction("CartIndex");
+        }
 
     }
 }

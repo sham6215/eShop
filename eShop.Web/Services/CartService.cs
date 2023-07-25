@@ -31,6 +31,24 @@ namespace eShop.Web.Services
             });
         }
 
+        public async Task<ResponseDto> RemoveCouponAsync(int cartHeadId)
+        {
+            var cart = new CartDto
+            {
+                CartHeader = new CartHeaderDto
+                {
+                    Id = cartHeadId
+                }
+            };
+
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = ApiType.DELETE,
+                Url = CartApiBase + $"/api/CartAPI/RemoveCoupon",
+                Data = cart
+            });
+        }
+
         public async Task<ResponseDto> GetCartAsync(string userId)
         {
             return await _baseService.SendAsync(new RequestDto()

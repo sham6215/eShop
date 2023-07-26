@@ -21,10 +21,15 @@ builder.Services.AddDbContext<AppDbContext>(option => {
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
 builder.Services.AddHttpClient(StaticData.ProductHttpClient, 
-    u => u.BaseAddress = new Uri(builder.Configuration[StaticData.ProductApiConfig]));
+    u => u.BaseAddress = new Uri(builder.Configuration[StaticData.ProductApiConfig]))
+    .AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>(); // Message handler for token adding
 builder.Services.AddHttpClient(StaticData.CouponHttpClient,
-    u => u.BaseAddress = new Uri(builder.Configuration[StaticData.CouponApiConfig]));
+    u => u.BaseAddress = new Uri(builder.Configuration[StaticData.CouponApiConfig]))
+    .AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>(); // Message handler for token adding
 
 // Services DI setup
 

@@ -81,5 +81,36 @@ namespace eShop.Web.Controllers
             return RedirectToAction("CartIndex");
         }
 
+        public async Task<IActionResult> SendCartEmail()
+        {
+            CartDto cartDto = await GetCartFromLoggedInUser();
+            cartDto.CartHeader.Email = 
+                User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Email)?.FirstOrDefault()?.Value;
+            var response = await _cartService.SendCartEmailAsync(cartDto);
+
+            if (response?.IsSuccess is true)
+            {
+                TempData["success"] = "Email will be sent shortly";
+            }
+            else
+            {
+                TempData["error"] = $"Can't send a cart email";
+            }
+
+            return RedirectToAction("CartIndex");
+        }
+
+        private async Task<CartDto> GetCartFromLoggedInUser()
+        {
+            var userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sub)?.FirstOrDefault()?.Value;
+            ResponseDto? response = await _cartService.GetCartAsync(userId);
+            if (response == null || !response.IsSuccess)
+            {
+                return new CartDto();
+            }
+
+            var cart = JsonConvert.DeserializeObject<CartDto>(Convert.ToString(response.Result));
+            return cart;
+        }
     }
 }

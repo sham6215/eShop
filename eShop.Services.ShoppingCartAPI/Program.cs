@@ -1,4 +1,5 @@
 using AutoMapper;
+using eShop.MessageBus;
 using eShop.Services.ShoppingCartAPI.Data;
 using eShop.Services.ShoppingCartAPI.Extensions;
 using eShop.Services.ShoppingCartAPI.Mapping;
@@ -37,6 +38,7 @@ builder.Services.AddHttpClient(StaticData.CouponHttpClient,
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICouponService, CouponService>();
+builder.Services.AddScoped<IMessageBus, MessageBus>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

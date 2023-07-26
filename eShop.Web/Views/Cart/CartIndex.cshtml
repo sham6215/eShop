@@ -1,7 +1,8 @@
 ﻿@using eShop.Web.Models.Dto;
 @model CartDto
-
-<form method="post">
+@if (Model.CartDetails != null && Model.CartDetails.Count() > 0)
+{
+    <form method="post" asp-action="SendCartEmail">
     <br />
     <div class="">
         <div class="card border mt-4 container">
@@ -79,7 +80,7 @@
             </div>
             <div class="card-footer row">
                 <div class="col-6 col-md-3 ">
-                    <button type="submit" class="btn btn-outline-danger form-control">Email Cart</button>
+                    <button asp-action="SendCartEmail" class="btn btn-outline-danger form-control">Email Cart</button>
                 </div>
                 <div class="col-6 col-md-3 offset-md-6">
                     <button disabled class="btn btn-success form-control ">Checkout (Comming Soon!)</button>
@@ -88,3 +89,6 @@
         </div>
     </div>
 </form>
+} else {
+    <div><p>Add items to Cart</p></div>
+}

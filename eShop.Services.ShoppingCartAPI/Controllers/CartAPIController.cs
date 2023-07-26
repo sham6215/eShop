@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using eShop.MessageBus;
 using eShop.Services.ShoppingCartAPI.Models;
 using eShop.Services.ShoppingCartAPI.Models.Dto;
 using eShop.Services.ShoppingCartAPI.Service.IService;
@@ -17,15 +18,21 @@ namespace eShop.Services.ShoppingCartAPI.Controllers
         private readonly IProductService _productService;
         private readonly ICouponService _couponService;
         private readonly IMapper _mapper;
+        private readonly IMessageBus _messageBus;
+        private readonly IConfiguration _configuration;
+
         private ResponseDto _response;
 
-        public CartAPIController(IShoppingCartService cartService, IMapper mapper, IProductService productService, ICouponService couponService)
+        public CartAPIController(IShoppingCartService cartService, IMapper mapper, IProductService productService,
+            ICouponService couponService, IMessageBus messageBus, IConfiguration configuration)
         {
             _cartService = cartService;
             _mapper = mapper;
             _response = new ResponseDto { IsSuccess = false };
             _productService = productService;
             _couponService = couponService;
+            _messageBus = messageBus;
+            _configuration = configuration;
         }
 
         [HttpGet("GetCart/{userId}")]
@@ -170,6 +177,22 @@ namespace eShop.Services.ShoppingCartAPI.Controllers
                     throw new Exception("Cart doesn't exist");
                 }
                 await _cartService.RemoveCouponAsync(cart.CartHeader.Id);
+                _response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                _response.Message = ex.InnerException?.Message ?? ex.Message;
+                return _response;
+            }
+            return _response;
+        }
+
+        [HttpPost("EmailCartRequest")]
+        public async Task<ResponseDto> PublishEmailCartMessage([FromBody] CartDto cart)
+        {
+            try
+            {
+                await _messageBus.PublishMessage(cart, _configuration.GetValue<string>("ServiceBus:EmailShoppingCartQueue"));
                 _response.IsSuccess = true;
             }
             catch (Exception ex)

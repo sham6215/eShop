@@ -1,4 +1,4 @@
-﻿namespace eShop.Services.ShoppingCartAPI.Models.Dto
+﻿namespace eShop.Services.EmailAPI.Models.Dto
 {
     public class CartDetailsDto
     {

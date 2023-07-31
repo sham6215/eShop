@@ -14,7 +14,7 @@ namespace eShop.MessageBus
         {
             /// Connection string must be defined in a project config.
             /// It is hardcoded to keep things simple.
-            var connectionString = "Endpoint=sb://eshop-service-bus-sham6215.servicebus.windows.net/;SharedAccessKeyName=queue-client;SharedAccessKey=g637RLa2eSAryqGZfOGVo/Q8JzPyf26d0+ASbBgU09M=;EntityPath=emailshopingcart";
+            var connectionString = "Endpoint=sb://eshop-service-bus-sham6215.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=8WN0sj5nonKmK4qlj5NRAtM/AMxu4D6eN+ASbPGjRrM=";
             var client = new ServiceBusClient(connectionString);
             try
             {

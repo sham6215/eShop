@@ -10,10 +10,16 @@ namespace eShop.Services.EmailAPI.Services
     public class EmailService : IEmailService
     {
         private readonly DbContextOptions<AppDbContext> _dbOptions;
+        private readonly IConfiguration _config;
+        
+        private string _adminEmail { get; set; }
+        
 
-        public EmailService(DbContextOptions<AppDbContext> options)
+        public EmailService(DbContextOptions<AppDbContext> options, IConfiguration config)
         {
-            this._dbOptions = options;
+            _dbOptions = options;
+            _config = config;
+            _adminEmail = _config.GetValue<string>("AdminEmail");
         }
 
         public async Task EmailCartAndLog(CartDto cartDto)
@@ -33,6 +39,19 @@ namespace eShop.Services.EmailAPI.Services
             sb.AppendLine("</ul>");
 
             await LogAndEmail(sb.ToString(), cartDto.CartHeader.Email);
+        }
+
+        public async Task EmailRegisterUserAndLog(UserDto userDto)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("<br/>Regiser User Email requested ");
+            sb.AppendLine("<br/>Email: " + userDto.Email);
+            sb.AppendLine("<br/>Name: " + userDto.Name);
+            sb.AppendLine("<br/>User Name: " + userDto.UserName);
+            sb.AppendLine("<br/>Phone: " + userDto.PhoneNumber);
+            sb.AppendLine("<br/>");
+            
+            await LogAndEmail(sb.ToString(), _adminEmail);
         }
 
         private async Task<bool> LogAndEmail(string message, string email)

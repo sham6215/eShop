@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using eShop.MessageBus;
 using eShop.Services.AuthAPI.Data;
 using eShop.Services.AuthAPI.Models;
 using eShop.Services.AuthAPI.Models.Dto;
@@ -19,17 +20,23 @@ namespace eShop.Services.AuthAPI.Controllers
         private readonly IMapper _mapper;
         private readonly ResponseDto _response = new ResponseDto();
         private readonly IAuthService _authService;
+        private readonly IMessageBus _messageBus;
+        private readonly IConfiguration _config;
 
         public AuthController(
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
             IAuthService authService,
-            IMapper mapper)
+            IMapper mapper,
+            IMessageBus messageBus,
+            IConfiguration config)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
             _authService = authService;
+            _messageBus = messageBus;
+            _config = config;
         }
 
         [HttpPost("Register")]
@@ -43,6 +50,7 @@ namespace eShop.Services.AuthAPI.Controllers
                 }
                 _response.IsSuccess = true;
                 _response.Result = userDto;
+                _messageBus.PublishMessage(userDto, _config.GetValue<string>("TopicAndQueueNames:EmailRegisterUserQueue"));
                 return Ok(_response);
             }
             catch (Exception ex)

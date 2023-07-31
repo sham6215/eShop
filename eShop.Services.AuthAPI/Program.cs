@@ -1,4 +1,5 @@
 using AutoMapper;
+using eShop.MessageBus;
 using eShop.Services.AuthAPI.Data;
 using eShop.Services.AuthAPI.Mapping;
 using eShop.Services.AuthAPI.Models;
@@ -27,6 +28,7 @@ builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSett
 // Add services
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+builder.Services.AddScoped<IMessageBus, MessageBus>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
